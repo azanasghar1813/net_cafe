@@ -1,0 +1,51 @@
+{
+  "name": "netcafe-pro",
+  "version": "1.0.0",
+  "description": "NetCafe PRO Management System",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:electron": "wait-on tcp:5173 && electron .",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:electron\"",
+    "build:frontend": "cd frontend && npm run build",
+    "dist": "npm run build:frontend && electron-builder --win --x64"
+  },
+  "build": {
+    "appId": "com.netcafe.pro",
+    "productName": "Greenway NetCafe",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "logo.png"
+    },
+    "files": [
+      "index.js",
+      "splash.html",
+      "backend/**/*",
+      "frontend/dist/**/*",
+      "node_modules/**/*"
+    ]
+  },
+  "keywords": [],
+  "author": "NetCafe",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^10.0.5",
+    "electron": "^44.4.4",
+    "electron-builder": "^26.15.3",
+    "wait-on": "^9.1.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "multer": "^2.4.0",
+    "sqlite3": "^6.0.1"
+  }
+}
